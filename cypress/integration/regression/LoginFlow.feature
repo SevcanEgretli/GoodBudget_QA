@@ -13,9 +13,8 @@ Feature: User Signup, Login and Logout
     When I log out
     Then I should be redirected to the logout page
 
-
   Scenario: User tries to log in with invalid credentials
-    Given I should be in the home page
+    Given I am on the GoodBudget login page
     When I try to log in with invalid credentials
     Then I should see an error message about invalid credentials
 
