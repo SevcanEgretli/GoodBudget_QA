@@ -21,7 +21,7 @@ When("I login with predefined credentials", () => {
   });
 });
 
-Then("I should be redirected to the home page", () => {
+Then("I should be in the home page", () => {
   cy.url().should("include", "/home");
   cy.get("#hi").should("contain.text", "test_sevcan");
   cy.contains("Welcome to Goodbudget! We're glad you're here.").should("be.visible");
