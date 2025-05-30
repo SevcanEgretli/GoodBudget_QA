@@ -1,29 +1,40 @@
-name: Run Cypress Tests
+name: Cypress Tests
 
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Start app or proxy if needed
-        run: echo "No app needed for Goodbudget tests"
-
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npm run test:run
+
+      - name: Merge mochawesome JSON reports
+        run: npm run report:merge
+
+      - name: Generate HTML report
+        run: npm run report:generate
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Cypress-HTML-Report
+          path: cypress/reports/html

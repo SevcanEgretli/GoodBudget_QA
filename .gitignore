@@ -3,3 +3,4 @@ cypress/screenshots/
 cypress/videos/
 dist/
 .env
+cypress/reports
