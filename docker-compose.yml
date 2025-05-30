@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CYPRESS_baseUrl=https://goodbudget.com
+    tty: true
