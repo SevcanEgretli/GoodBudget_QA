@@ -10,7 +10,7 @@ export default defineConfig({
   chromeWebSecurity: false,
   retries: {
     runMode: 1,
-    openMode: 2,
+    // openMode: 2,
   },
   e2e: {
     specPattern: "cypress/**/*.feature",
