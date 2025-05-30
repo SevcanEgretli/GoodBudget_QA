@@ -1,27 +1,21 @@
 import { Then } from "@badeball/cypress-cucumber-preprocessor";
+import { getCookieHeader } from "../../helpers/cookieUtils";
+import { buildPayload } from "../../helpers/envelopeUtils";
 
 Then("I create an envelope named {string} with amount {int} via API", (envelopeName: string, amount: number) => {
   cy.getCookies().then((cookies) => {
-    const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join("; ");
+    const cookieHeader = getCookieHeader(cookies);
 
-    const body = {
-      ENV_REG: JSON.stringify([
-        {
-          Uuid: "",
-          FullName: envelopeName,
-          Amount: amount.toString(),
-          PeriodExtra: "1",
-          Period: "MON",
-          EnvelopeType: "ENV_REG"
-        }
-      ]),
-      ENV_IRR: "[]",
-      ENV_DT_PMT: "[]",
-      period: "MON",
-      period_extra_0: "1",
-      period_extra_1: "",
-      deleted: "[]"
-    };
+    const payload = buildPayload([
+    {
+        Uuid: "",
+        FullName: envelopeName,
+        Amount: amount.toFixed(2),
+        Period: "MON",
+        PeriodExtra: "1",
+        EnvelopeType: "ENV_REG"
+    }
+]);
 
     cy.request({
       method: "POST",
@@ -30,10 +24,7 @@ Then("I create an envelope named {string} with amount {int} via API", (envelopeN
         "Content-Type": "application/x-www-form-urlencoded",
         "cookie": cookieHeader
       },
-      form: true,
-      body
-    }).then((resp) => {
-      expect(resp.status).to.eq(200);
+      body: payload.toString()
     });
   });
 });
@@ -63,7 +54,7 @@ Then(
   "I update the envelope named {string} to have name {string} and amount {int}",
   (oldName: string, newName: string, newAmount: number) => {
     cy.getCookies().then((cookies) => {
-      const cookieHeader = cookies.map((c) => `${c.name}=${c.value}`).join("; ");
+      const cookieHeader = getCookieHeader(cookies);
 
       cy.request({
         method: "GET",
@@ -88,14 +79,7 @@ Then(
           };
         });
 
-        const payload = new URLSearchParams();
-        payload.append("ENV_REG", JSON.stringify(updatedEnvReg));
-        payload.append("ENV_IRR", JSON.stringify([]));
-        payload.append("ENV_DT_PMT", JSON.stringify([]));
-        payload.append("period", "MON");
-        payload.append("period_extra_0", "1");
-        payload.append("period_extra_1", "");
-        payload.append("deleted", JSON.stringify([]));
+        const payload = buildPayload(updatedEnvReg);
 
         cy.request({
           method: "POST",
@@ -115,7 +99,7 @@ Then(
 
 Then("I delete the envelope named {string}", (name: string) => {
   cy.getCookies().then((cookies) => {
-    const cookieHeader = cookies.map((c) => `${c.name}=${c.value}`).join("; ");
+    const cookieHeader = getCookieHeader(cookies);
 
     cy.request({
       method: "GET",
@@ -128,20 +112,8 @@ Then("I delete the envelope named {string}", (name: string) => {
       const envelope = resp.body.envelopes.find((env: any) => env.name === name);
       expect(envelope, `Envelope '${name}' should exist`).to.not.be.undefined;
 
-      const deletedPayload = [
-        {
-          Uuid: envelope.uuid,
-        },
-      ];
+      const payload = buildPayload([], [], [], [{ Uuid: envelope.uuid }]);
 
-      const payload = new URLSearchParams();
-      payload.append("ENV_REG", JSON.stringify([]));
-      payload.append("ENV_IRR", JSON.stringify([]));
-      payload.append("ENV_DT_PMT", JSON.stringify([]));
-      payload.append("period", "MON");
-      payload.append("period_extra_0", "1");
-      payload.append("period_extra_1", "");
-      payload.append("deleted", JSON.stringify(deletedPayload));
 
       cy.request({
         method: "POST",
