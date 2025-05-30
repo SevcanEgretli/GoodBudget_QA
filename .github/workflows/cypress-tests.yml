@@ -46,7 +46,7 @@ jobs:
         run: npm run report:generate
 
       - name: Upload HTML report as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: Cypress-HTML-Report
           path: cypress/reports/html
