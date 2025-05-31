@@ -57,12 +57,12 @@
 - Cookies and localStorage are being used securely.
 
 ### Issues Found:
-- No visual feedback after clicking "Save" on the "Add Transaction" modal. **LOW**
 - Signup fails silently when the CAPTCHA is missing or invalid. No validation message is shown, and the user is not created. **HIGH**
-- The "Get Goodbudget Premium" userpilot-slide cannot be closed, resulting in a poor user experience. **LOW**
 - The limitation about creating envelopes with the same name is only handled on the frontend. I was able to create multiple envelopes with the same name by sending API requests directly. **HIGH**
 - In the "Add Transaction" modal, there is an empty tab with id="selectTypeTab" next to "Debt Transaction". It doesn’t have any function and input field. **HIGH**
 - When entering an invalid amount like 23.44004344, the warning message is misleading. It should specify the 2-digit limit after the decimal. **MEDIUM**
+- No visual feedback after clicking "Save" on the "Add Transaction" modal. **LOW**
+- The "Get Goodbudget Premium" userpilot-slide cannot be closed, resulting in a poor user experience. **LOW**
 - When resizing the text areas in the "Add Transaction" modal, the new size persists even after closing and reopening the modal. **LOW**
 - Tooltip text for chart icons is not accessible via keyboard navigation (Tab/Arrow keys). **LOW**
 
@@ -81,7 +81,7 @@ A budgeting application like Goodbudget deals with sensitive personal and financ
 - Improper input validation (e.g., invalid amounts, dates, or duplicate envelope names) can corrupt the data or break calculations.
 
 ### Session Management Risks
-- If logout does not properly clear the session, or old passwords remain valid temporarily, it can cause session hijacking or confusion.
+- If logout does not properly clear the session, or old passwords remain valid temporarily, it can cause confusion.
 
 ### Accessibility and Usability Risks
 - Users with disabilities may face difficulties if the application is not keyboard accessible or doesn’t meet WCAG standards.
