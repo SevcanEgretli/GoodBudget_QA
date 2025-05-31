@@ -8,7 +8,7 @@ Exploratory testing session document, end-to-end and API test automation framewo
 * [Cypress Cucumber Preprocessor](https://github.com/badeball/cypress-cucumber-preprocessor)
 * [Mochawesome](https://github.com/adamgruber/mochawesome)
 * [Docker](https://www.docker.com/)
-* GitHub Actions for CI
+* [GitHub Actions](https://github.com/features/actions) for CI
 
 ---
 
