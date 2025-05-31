@@ -96,9 +96,3 @@ Reports created by Mockawesome in JSON format and merged. Open it in a browser t
 ## 💪 GitHub Actions
 
 GitHub Actions is configured to run tests on every push and pull request. The generated HTML report is uploaded as an artifact automatically. Also provides screenshots when an error displays.
-
----
-
-## ✨ Author
-
-Sevcan Egretli – [LinkedIn](https://www.linkedin.com/in/sevcan-erdogan)
