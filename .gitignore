@@ -4,3 +4,4 @@ cypress/videos/
 dist/
 .env
 cypress/reports
+.github/workflows/parallel-test.yml
