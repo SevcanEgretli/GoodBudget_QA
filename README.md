@@ -1,6 +1,6 @@
 # GoodBudget QA Take-Home Challenge
 
-Exploratory testing session document, end-to-end and API test automation framework for [GoodBudget](https://goodbudget.com), powered by **Cypress**, **Cucumber**, and **Docker**.
+This project includes exploratory testing session document, UI end-to-end and API test automation framework for [GoodBudget](https://goodbudget.com) web application, powered by **Cypress**, **Cucumber**, and **Docker**.
 
 ## 🔧 Technologies Used
 
@@ -38,6 +38,12 @@ This command runs all tests by using Cypress and created JSON reports. Merged HT
 
 ```bash
 npm run test
+```
+
+### 🐞 3. Run Tests headed browser
+
+```bash
+npx cypress run --headed --browser chrome
 ```
 
 ---
