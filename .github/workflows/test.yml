@@ -1,0 +1,14 @@
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npx cypress install
+      - run: npx cypress run --browser ${{ matrix.browser }}
