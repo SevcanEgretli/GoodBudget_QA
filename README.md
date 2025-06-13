@@ -29,7 +29,7 @@ npm ci
 ### ✅ 1. Run All Tests
 
 ```bash
-npm run test:all
+npm run test
 ```
 
 This command runs all tests by using Cypress and created JSON reports. Merged HTML reports is located at `cypress/reports/html/report.html`
